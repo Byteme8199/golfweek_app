@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+
+<head>
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+
+
+    <script type="text/javascript" src='http://code.jquery.com/jquery-2.0.3.min.js'></script>
+    <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js'></script>
+
+
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+
+        app.directive('siteCheck', function () {
+            return {
+                restrict: 'E',
+                controller: function ($scope, $http) {
+
+                }
+            };
+        });
+
+
+        app.directive('site', function ($http) {
+            return {
+                restrict: 'E',
+                template: '<div>{{scope.thing}}</div>',
+                link: function (scope, elem, attrs) {
+                    console.log(attrs.url);
+                    $http.get(attrs.url).
+                        success(function (data, status) {
+                            console.log(status);
+                            scope.$apply(function () {
+                                scope.stat = status;
+                            });
+                        }).
+                        error(function (data, status) {
+                            console.log(status);
+                        });
+                }
+            };
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div id='stuff'>Check</div>
+        <button id='gw' name='http://golfweek.com'>Check GW</button>
+
+
+
+
+        <site-check url='http://golfweek.com'></site-check>
+
+
+
+
+
+
+
+
+
+		<div id=yt>
+
+		</div>
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+        function req(url) {
+
+        			$('#stuff').html('Checking ...')
+
+        			$.ajax({
+        				url: url,
+        				type: 'GET',
+        				xhr: function() {
+
+        					var xhr = new window.XMLHttpRequest();
+
+        					xhr.addEventListener('error', function(e) {
+        						console.log(e);
+        					}, false);
+
+        					xhr.addEventListener('abort', function(e) {
+        						console.log(2, e);
+        					}, false);
+
+        					return xhr;
+        				},
+
+        				error: function(xhr) {
+        					console.log(xhr);
+        					$('#stuff').html(xhr.status + '  ' + xhr.statusText + ' -> ' + url);
+        				}
+
+        			}).done(function(data, status, xhr) {
+        				$('#stuff').html(xhr.status + '  ' + status + ' -> ' + url);
+        			});
+
+        		}
+
+
+        		$(document).ready(function() {
+
+        			var url = 'http://golfweek.com';
+        			req(url);
+
+        			$('#gw').click(function (e) {
+        				e.preventDefault();
+
+        				req($(this).attr('name'));
+
+        			});
+
+        		});
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container" align="center">
+    <div class="navbar-header" >
+      
+      <div class="navbar-icon" data-toggle="collapse" data-target="#sidebar" ng-click="side = !side;"></div>
+      
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" ng-class="{true:'collapse', false:''}[side]" id="sidebar" role="navigation">
+          <div class="sidebar-nav">
+            <ul class="nav">
+              <li><title></title></li>
+              <!-- Section -->
+              <li ng-repeat="section in feedData.sections" ng-click="sideToggle()">
+                  <!--<img src="img/icon-{{section.url}}.png">--> 
+                  <a ng-href='#/section/{{section.url}}/' section="title"></a>
+              </li>
+              <!-- End Repeat -->
+            </ul>
+          </div><!--/.well -->
+      </div><!--/span-->
+      
+      <a class="navbar-brand" href="#">GOLFWEEK NEWS<div id="navbar-logo"></div></a>
+    </div>
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+
+
+
+<div class="maindiv" ui-view></div>

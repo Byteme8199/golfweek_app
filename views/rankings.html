@@ -1,0 +1,29 @@
+<div id="interstitial" interstitial></div>
+<div id="interstitialad"></div>
+
+<div id="storyArea" class="col-sm-12">
+	<table>
+		<tr>
+		  <th><a href="" ng-click="reverse=!reverse;order('place', reverse)">#</a>
+		  <th><a href="" ng-click="reverse=false;order('name', false)">Name</a>
+		  <th><a href="" ng-click="reverse=!reverse;order('rating', reverse)">Rating</a>
+		  <th><a href="" ng-click="reverse=!reverse;order('events', reverse)">Events</a></th>
+		  <th><a href="" ng-click="reverse=!reverse;order('rank',reverse)">Schedule (Rank)</a></th>
+		</tr>
+		<tbody>
+			<tr ng-repeat="ranking in rankingData track by $index">
+				<td>{{ranking.place}}</td>
+				<td>{{ranking.name}}</td>
+				<td>{{ranking.rating}}</td>
+				<td>{{ranking.events}}</td>
+				<td>{{ranking.sked}} ({{ranking.rank}})</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>	
+	<div class="push">&nbsp;</div>
+</div>
+
+<div id="adarea" class="adarea" align='center'>
+	<div id='mainAd' ad-img></div>
+</div>

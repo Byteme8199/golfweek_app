@@ -1,0 +1,43 @@
+<div id="interstitial" interstitial></div>
+<div id="interstitialad"></div>
+
+<div id="storyArea" class="col-sm-12">
+
+	<div class="item">
+		<h4>Search: </h4>
+		<input type="text" name="text" ng-model='searchQuery' value="{{searchQuery}}" />
+		<input type="submit" id="submit" value="Submit" hm-tap="submit()" />
+	</div>
+
+
+	<div id="itemArea">
+		<div class="item {{story.class}}" ng-repeat="story in searchData.stories">
+			<div class="PinBase Pin Module summary ajax lite" data-component-type="0">
+				<div class="pinWrapper">
+					<div class="pinHolder">
+						<a class="pinImageWrapper" ng-href="{{story.id}}" ng-click="close()">
+							<div class="fadeContainer">
+								<div class="hoverMask"></div>
+								<img class="pinImg fullBleed loaded fade" ng-src="{{story.photourl}}">
+								<div class="padded-cell">
+									<h4 class="nomargin" >
+										<a href="{{story.id}}" story="headline"></a>
+									</h4>
+									<span class="sideboard-date" story="pubDate"></span>
+									<span class="sideboard-date" story="author"></span>
+									<p story="tease"></p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cleardivs"></div>
+	</div>
+	<div class="push">&nbsp;</div>
+</div>
+
+<div id="adarea" class="adarea" align='center'>
+	<div id='mainAd' ad-img></div>
+</div>

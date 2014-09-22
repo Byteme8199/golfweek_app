@@ -1,0 +1,13 @@
+<div id="storyArea" class="col-sm-12">             
+    <h4 class="favorites-header">Your Favorites</h4>
+    	
+    <ul class="favorites">
+        <li ng-repeat="story in sectionData">
+        	<a class='arrow' fav-button="{{story.title}}">&#9734;</a>                    
+        	<a class="pinImageWrapper" ng-href="{{story.url}}">
+            	<strong class="nomargin" story="title"></strong>
+			</a>
+        </li>
+    <ul>
+    <div class="push">&nbsp;</div>
+</div>

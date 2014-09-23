@@ -1,0 +1,31 @@
+html.no-js(ng-app='newsApp')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Golfweek
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width')
+    // Place favicon.ico and apple-touch-icon.png in the root directory 
+    // build:css(.tmp) styles/main.css 
+    link(rel='stylesheet', href='/styles/bootstrap.css')
+    link(rel='stylesheet', href='/styles/main.css')
+    link(rel='stylesheet', href='http://mobile.golfweek.com/styles/external.css')
+    // endbuild 
+    base(href='/')
+  body#appstart(ng-app='project', ng-controller='loadCtrl', ng-cloak='ng-cloak')
+
+    block content
+
+    script(src='/bower_components/jquery/jquery.js')
+    script(src='/bower_components/angular/angular.js')
+    // build:js scripts/modules.js 
+    script(src='/bower_components/angular-resource/angular-resource.js')
+    script(src='/bower_components/angular-sanitize/angular-sanitize.js')
+    script(src='/bower_components/angular-route/angular-route.js')
+    script(src='/bower_components/hammerjs/dist/hammer.js')
+    script(src='/bower_components/angular-hammer/angular-hammer.js')
+    // endbuild 
+    // build:js({.tmp,app}) scripts/scripts.js 
+    script(src='/scripts/app.js')
+    script(src='/scripts/controllers/main.js')
+    // endbuild

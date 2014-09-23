@@ -37,7 +37,7 @@ gulp.task('js', function() {
 });
  
 gulp.task('views', function() {
-  return gulp.src('src/jade/*.jade')
+  return gulp.src('src/views/*.jade')
     .pipe(jade({
       pretty: true
     }))

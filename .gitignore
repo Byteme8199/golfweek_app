@@ -1,3 +1,11 @@
 # Node Folders
+node_modules/
 node_modules/**
 
+# Bower Folders
+src/bower*
+src/bower*/*
+
+# Distribution Folder
+dist/
+dist/*

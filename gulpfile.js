@@ -16,35 +16,46 @@ var gulp        = require('gulp'),
  
 // --- Basic Tasks ---
 gulp.task('css', function() {
-  return gulp.src('src/assets/stylesheets/*.scss')
+  return gulp.src('src/styles/*.scss')
     .pipe( 
       sass( { 
-        includePaths: ['src/assets/stylesheets'],
+        includePaths: ['src/styles'],
         errLogToConsole: true
       } ) )
     .pipe( csso() )
-    .pipe( gulp.dest('dist/assets/stylesheets/') )
+    .pipe( gulp.dest('dist/styles/') )
     .pipe( livereload( server ));
 });
  
 gulp.task('js', function() {
-  return gulp.src('src/assets/scripts/*.js')
-    .pipe( uglify() )
+  return gulp.src('src/scripts/*.js')
+    // commented out uglify till I'm sure it won't break
+    // .pipe( uglify() )
     .pipe( concat('all.min.js'))
-    .pipe( gulp.dest('dist/assets/scripts/'))
+    .pipe( gulp.dest('dist/scripts/'))
     .pipe( livereload( server ));
 });
  
-gulp.task('templates', function() {
+gulp.task('views', function() {
+  return gulp.src('src/jade/*.jade')
+    .pipe(jade({
+      pretty: true
+    }))
+    .pipe(gulp.dest('dist/views/'))
+    .pipe( livereload( server ));
+});
+
+gulp.task('index', function() {
   return gulp.src('src/*.jade')
     .pipe(jade({
       pretty: true
     }))
     .pipe(gulp.dest('dist/'))
     .pipe( livereload( server ));
-});
- 
+}); 
+
 gulp.task('express', function() {
+  app.use(require('connect-livereload')());
   app.use(express.static(path.resolve('./dist')));
   app.listen(1337);
   gutil.log('Listening on port: 1337');
@@ -60,10 +71,12 @@ gulp.task('watch', function () {
  
     gulp.watch('src/assets/js/*.js',['js']);
  
-    gulp.watch('src/*.jade',['templates']);
+    gulp.watch('src/*.jade',['index']);
     
+    gulp.watch('src/views/*.jade',['views']);
+
   });
 });
  
 // Default Task
-gulp.task('default', ['js','css','templates','express','watch']);
+gulp.task('default', ['js', 'css', 'index', 'views', 'express', 'watch']);

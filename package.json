@@ -1,0 +1,32 @@
+{
+  "name": "golfweek_app",
+  "version": "1.0.0",
+  "description": "Golfweek News App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jason-s-davis/golfweek_app.git"
+  },
+  "author": "Jason Davis",
+  "license": "Golfweek",
+  "bugs": {
+    "url": "https://github.com/jason-s-davis/golfweek_app/issues"
+  },
+  "homepage": "https://github.com/jason-s-davis/golfweek_app",
+  "devDependencies": {
+    "gulp-concat": "~2.1.7",
+    "gulp-util": "~2.2.12",
+    "gulp": "~3.5.0",
+    "gulp-uglify": "~0.1.0",
+    "gulp-csso": "~0.1.8",
+    "gulp-sass": "~0.4.1",
+    "gulp-jade": "~0.3.0",
+    "gulp-livereload": "~0.2.0",
+    "tiny-lr": "0.0.5",
+    "express": "~3.4.8",
+    "marked": "~0.3.0"
+  }
+}

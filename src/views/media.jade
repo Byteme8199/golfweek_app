@@ -1,0 +1,55 @@
+// remove interstitial on mobile
+include interstitial
+
+
+.loc-area(align='center')
+  .backArrow(back-button='back-button')
+    a.arrow &lt;
+  #sub-nav-items
+    a.navItems(ng-repeat='item in navItems', ng-href='/section/{{linkify(item)}}/', ng-bind='item')
+
+
+
+div(ng-switch='ng-switch', on='section', style='height: 100%;', scroll-thing='scroll-thing', media='true')
+
+  #storyArea.col-sm-12(ng-switch-when='photo-galleries', hm-dragup='fetchMore()', hm-dragdown='refresh()')
+    #itemArea.GalleryItemArea
+        .item.{{story.class}}(ng-repeat='story in sectionData.stories')
+          .PinBase.Pin.Module.summary.ajax.lite(data-component-type='0')
+            .pinWrapper
+              .pinHolder
+                a.pinImageWrapper(ng-href='/media/{{section}}/{{story.id}}')
+                  .fadeContainer
+                    .hoverMask
+                    img.pinImg.fullBleed.loaded.fade(ng-src='{{story.photourl}}')
+                    .padded-cell
+                      h4.nomargin
+                        a(ng-href='/media/{{section}}/{{story.id}}', story='headline')
+                      span.sideboard-date(story='pubDate')
+                      span.sideboard-date(story='author')
+                      p(story='tease')
+        .cleardivs
+      .push &nbsp;
+
+
+  #storyArea.col-sm-12(ng-switch-when='videos', hm-dragup='fetchMore()', hm-dragdown='refresh()')
+    #itemArea
+        .item.{{story.class}}(ng-repeat='story in sectionData.stories')
+          .PinBase.Pin.Module.summary.ajax.lite(data-component-type='0')
+            .pinWrapper
+              .pinHolder
+                a.pinImageWrapper(ng-href='/media/{{section}}/{{story.id}}')
+                  .fadeContainer
+                    .hoverMask
+                    img.pinImg.fullBleed.loaded.fade(ng-src='{{story.photourl}}')
+                    .padded-cell
+                      h4.nomargin
+                        a(ng-href='/media/{{section}}/{{story.id}}', story='headline')
+                      span.sideboard-date(story='pubDate')
+                      span.sideboard-date(story='author')
+                      p(story='tease')
+        .cleardivs
+      .push &nbsp;
+
+
+include mainad

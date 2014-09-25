@@ -1,0 +1,29 @@
+// remove interstitial on mobile
+include interstitial
+
+
+#storyArea.col-sm-12(scroll-thing='scroll-thing', hm-dragup='fetchMore()', hm-dragdown='refresh()')
+  .loc-area(ng-show='ng-show', navitems.length='navItems.length > 0')
+    #sub-nav-items
+      a.navItems(ng-repeat='item in navItems', ng-href='/news/{{linkify(item)}}/', ng-bind='item')
+      
+    #itemArea
+      .item.{{story.class}}(ng-repeat='story in sectionData.stories')
+        .PinBase.Pin.Module.summary.ajax.lite(data-component-type='0')
+          .pinWrapper
+            .pinHolder
+              a.pinImageWrapper(ng-href='{{story.id}}', ng-click='close()')
+                .fadeContainer
+                  .hoverMask
+                  img.pinImg.fullBleed.loaded.fade(ng-src='{{story.photourl}}')
+                  .padded-cell
+                    h4.nomargin
+                      a(ng-href='{{story.id}}', story='headline')
+                    span.sideboard-date(story='pubDate')
+                    span.sideboard-date(story='author')
+                    p(story='tease')
+    .cleardivs
+  .push &nbsp;
+
+
+include mainad

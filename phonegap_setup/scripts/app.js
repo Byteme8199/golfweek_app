@@ -717,11 +717,16 @@ newsApp.directive('adImg', ['$q', '$window', '$timeout',
 		}
 
 		return function (scope, element, attrs) {
-			$timeout(function () {
-				newWindow(element[0]);
-			}, 300);
+			//$timeout(function () {
+			//	newWindow(element[0]);
+			//}//, 300);
 			//			console.log($(element).parent());
-			putAd(scope, element[0].id);
+			//putAd(scope, element[0].id);
+            
+            /*
+             * this code needs to be updated to match the new 
+             * fixes added 9-24
+             */
 		};
         }]);
 

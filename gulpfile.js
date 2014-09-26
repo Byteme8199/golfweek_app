@@ -26,6 +26,11 @@ gulp.task('css', function() {
     .pipe( gulp.dest('dist/styles/') )
     .pipe( livereload( server ));
 });
+
+gulp.task('vendor' , function() {
+  return gulp.src([''/*files go here*/])
+    .pipe( gulp.dest('dist/scripts/vendor/');
+});
  
 gulp.task('js', function() {
   return gulp.src('src/scripts/*.js')

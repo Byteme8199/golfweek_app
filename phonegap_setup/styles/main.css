@@ -9,7 +9,7 @@
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    /*-webkit-user-select: none; */                 /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 /* ************************************************  */
 
@@ -732,7 +732,7 @@ blockquote { pointer-events: none; }
   	.related {
 		width: 20%;
 	}
-	.item { 
+	.item {
 		width: 25%
 	}
 	#itemArea > div:nth-child(4n+1) {
@@ -746,7 +746,7 @@ blockquote { pointer-events: none; }
   	.related {
 		width: 25%;
 	}
-	.item { 
+	.item {
 		width: 33%;
 	}
 	#itemArea > div:nth-child(3n+1) {
@@ -761,8 +761,8 @@ blockquote { pointer-events: none; }
   	.related {
 	  width:33%
   	}
-	
-	.item { 
+
+	.item {
 		width: 50%;
 	}
 	#itemArea > div:nth-child(odd) {
@@ -777,7 +777,7 @@ blockquote { pointer-events: none; }
 	.related {
 	  width:50%
 	}
-	.item { 
+	.item {
 		width: 100%;
 	}
 	.h_iframe { max-width: 100%; }

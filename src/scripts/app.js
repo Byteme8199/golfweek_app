@@ -1,8 +1,13 @@
-var newsApp = angular.module('newsApp', [
-    'ngSanitize',
-    'ngRoute',
-    'hmTouchEvents'
-]);
+var angular = require('./vendor/angular');
+var sanitize = require('./vendor/angular-sanitize');
+var touch = require('./vendor/angular-touch');
+var route = require('./vendor/angular-route');
+
+console.log(angular, sanitize, touch, route);
+
+
+
+var newsApp = angular.module('newsApp', ['ngSanitize', 'ngRoute', 'ngTouch']);
 
 
 newsApp.config(['$httpProvider',
@@ -1036,3 +1041,6 @@ newsApp.directive('interstitial', ['$q', '$window',
 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 ga('create', 'UA-565433-1', 'golfweek.com');
+
+
+var controllers = require('./controllers/main');

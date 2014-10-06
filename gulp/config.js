@@ -65,6 +65,13 @@ module.exports = {
           // depends: {
           //   jquery: '$'
           // }
+        },
+        ngSanitize: {
+          path: './src/scripts/vendor/angular-sanitize.js',
+          exports: 'ngSanitize',
+          depends: {
+            angular: 'angular'
+          }
         }
       }
     },

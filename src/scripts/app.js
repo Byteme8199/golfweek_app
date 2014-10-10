@@ -1,12 +1,3 @@
-var angular = require('./vendor/angular');
-var sanitize = require('./vendor/angular-sanitize');
-var touch = require('./vendor/angular-touch');
-var route = require('./vendor/angular-route');
-
-console.log(angular, sanitize, touch, route);
-
-
-
 var newsApp = angular.module('newsApp', ['ngSanitize', 'ngRoute', 'ngTouch']);
 
 
@@ -15,23 +6,6 @@ newsApp.config(['$httpProvider',
 		'use strict';
 		$httpProvider.defaults.useXDomain = true;
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
-
-		// This just needed a home somewhere and it will work here as well
-		// creates the google analytics object and attaches to window
-		//		(function (i, s, o, g, r, a, m) {
-		//			i['GoogleAnalyticsObject'] = r;
-		//			i[r] = i[r] || function () {
-		//				(i[r].q = i[r].q || []).push(arguments)
-		//			}, i[r].l = 1 * new Date();
-		//			a = s.createElement(o),
-		//			m = s.getElementsByTagName(o)[0];
-		//			a.async = 1;
-		//			a.src = g;
-		//			m.parentNode.insertBefore(a, m)
-		//		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-		//
-		//		ga('create', 'UA-565433-1', 'golfweek.com');
 
     }]);
 

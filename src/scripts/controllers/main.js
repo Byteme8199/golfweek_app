@@ -1,3 +1,5 @@
+var newsApp = angular.module('newsApp');
+
 newsApp.controller('loadCtrl', ['$scope', '$window',
     function ($scope, $window) {
 		'use strict';

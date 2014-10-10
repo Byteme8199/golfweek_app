@@ -12,4 +12,4 @@
 	* this command changes the maximum number of watches that can be set by the user 
 * now you are ready to start working
 * all of the editing should be done in the src folder _NOT_ the dist folder
-* you can view your work with auto reload at localhost:1337
+* you can view your work with auto reload at localhost:3000

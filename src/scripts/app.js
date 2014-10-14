@@ -1017,4 +1017,4 @@ newsApp.directive('interstitial', ['$q', '$window',
 ga('create', 'UA-565433-1', 'golfweek.com');
 
 
-var controllers = require('./controllers/main');
+//var controllers = require('./controllers/main');

@@ -1,3 +1,5 @@
+
+
 newsApp.controller('loadCtrl', ['$scope', '$window',
     function ($scope, $window) {
 		'use strict';

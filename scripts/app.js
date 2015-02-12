@@ -718,11 +718,11 @@ function ($q, $window) {
   return function (scope, element, attrs) {
     // putAd(scope, element[0].id);
 
-    var getRand = Math.floor((Math.random()*600)+1);
-    var url = 'http://pubads.g.doubleclick.net/gampad/jump?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' + getRand;
-    element.html('<a id="adclick" href="' + url + '" target="_blank"><img src="http://pubads.g.doubleclick.net/gampad/ad?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' +
-                  getRand + '"></a>');
-    newWindow(element[0], url);
+    // var getRand = Math.floor((Math.random()*600)+1);
+    // var url = 'http://pubads.g.doubleclick.net/gampad/jump?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' + getRand;
+    // element.html('<a id="adclick" href="' + url + '" target="_blank"><img src="http://pubads.g.doubleclick.net/gampad/ad?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' +
+    //               getRand + '"></a>');
+    // newWindow(element[0], url);
 
   };
 }]);

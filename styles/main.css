@@ -101,7 +101,6 @@ footer {
 }
 .nav > li > a:hover, .nav > li > a:focus  { background-color:#3E3F3F }
 
-
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     color: #FFFFFF;
     background: rgb(181,189,200); /* FF3.6+ */
@@ -757,7 +756,7 @@ blockquote { pointer-events: none; }
 	#related-4 { display: none }
 }
 
-@media (min-width: 400px) and (max-width: 600px) {
+@media (min-width: 430px) and (max-width: 600px) {
   	.related {
 	  width:33%
   	}
@@ -769,11 +768,11 @@ blockquote { pointer-events: none; }
 		clear:both;
 	}
 	.h_iframe { max-width: 90%; }
-	#youtubeplayer { width: 400px; height: 225px }
+	#youtubeplayer { width: 430px; height: 230px }
 	#related-3, #related-4 { display: none }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 430px) {
 	.related {
 	  width:50%
 	}

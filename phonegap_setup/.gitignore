@@ -1,0 +1,55 @@
+# Node Folders #
+################
+node_modules/
+node_modules/**
+npm-debug.log
+
+# Bower Folders #
+#################
+src/bower*
+src/bower*/*
+
+# Distribution Folder #
+#######################
+dist/
+dist/*
+
+# Keys #
+########
+keys/
+keys/*
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+
+# Gulp Build files and folders #
+################################
+.sass-cache
+build
+dist
+
+

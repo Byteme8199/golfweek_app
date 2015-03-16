@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="no-js" ng-app="newsApp">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Golfweek</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="styles/bootstrap.css">
+	<link rel="stylesheet" href="styles/main.css">
+
+
+	<link rel="stylesheet" href="http://app.golfweek.com/styles/external.css">
+
+
+
+</head>
+
+<body ng-app="project" id="appstart" ng-controller="loadCtrl" ng-cloak>
+	<div id="loaddiv" ng-show="loading">
+		<img src="img/ajax-loader.gif">
+	</div>
+
+
+	<div class="maindiv" ng-controller="newsHome" hm-swiperight="open()" hm-swipeleft="close()" >
+
+		<!-- NAV BAR -->
+		<div id="navbar-top">
+			<div id="navbar-top-logo">
+				<a class="navbar-brand" href="#/"></a>
+			</div>
+
+			<div class="navbar-icon" data-target="#sidebar" hm-tap="sideToggle();"></div>
+
+			<div id="navbar-top-back">
+				<div class="backArrow back-icon" back-button></div>
+			</div>
+
+			<div id="navbar-top-back">
+				<div class="share-icon" hm-tap="theFunk()" ng-show="title"></div>
+			</div>
+
+
+		</div>
+
+		<!-- SIDE MENU -->
+		<div class="sidebar-offcanvas {{side}}" id="sidebar" role="navigation">
+			<div class="sidebar-nav">
+				<ul class="nav">
+					<!-- Section -->
+					<li>
+						<a href="#/leaderboards/pga" hm-tap="sideToggle(); route('leaderboards/pga')">Leaderboards</a>
+					</li>
+					<li ng-repeat="section in feedData.sections">
+						<a hm-tap="sideToggle(); route('{{section.url}}/');" section="title"></a>
+					</li>
+					<!-- End Repeat -->
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<!--/span-->
+
+		<!-- BODY CONTENT -->
+		<div id='theview' class="bodydiv nav-{{side}}" ng-view ng-cloak></div>
+	</div>
+
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="/js/plugins/SocialSharing.js"></script>
+
+	<script src="scripts/libs/jquery.js"></script>
+	<script src="scripts/libs/angular.js"></script>
+
+	<script src="scripts/libs//angular-resource.js"></script>
+	<script src="scripts/libs//angular-sanitize.js"></script>
+	<script src="scripts/libs//angular-route.js"></script>
+	<script src="scripts/libs//hammer.js"></script>
+	<script src="scripts/libs//angular-hammer.js"></script>
+
+	<script src="scripts/app.js"></script>
+	<script src="scripts/controllers/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<div id="storyArea" class="col-sm-12" scroll-thing hm-dragup="fetchMore()" hm-dragdown="refresh()">
+
+	<div class="loc-area" ng-show="navItems.length > 0">
+		<div id="sub-nav-items">
+			<a class='navItems' ng-repeat='item in navItems' ng-href="#/news/{{linkify(item)}}/" ng-bind="item"></a>
+		</div>
+	</div>
+
+	<div id="itemArea">
+			<div class="item {{story.class}}" ng-repeat="story in sectionData.stories">
+				<div ng-if="($index+1)%4==0" class='storyAd padded-ad-cell' storyad-img align="center"></div>
+				<div ng-if="($index+1)%4!=0" class="PinBase Pin Module summary ajax lite" data-component-type="0">
+					<div class="pinWrapper">
+						<div class="pinHolder">
+							<a class="pinImageWrapper" ng-href="#{{story.id}}" ng-click="close()">
+								<div class="fadeContainer">
+									<div class="hoverMask"></div>
+									<img class="pinImg fullBleed loaded fade" ng-src="{{story.photourl}}">
+									<div class="padded-cell">
+										<h4 class="nomargin" >
+											<a href="#{{story.id}}" story="headline"></a>
+										</h4>
+										<span class="sideboard-date" story="pubDate"></span>
+										<span class="sideboard-date" story="author"></span>
+										<p story="tease"></p>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="cleardivs"></div>
+	</div>
+	<div class="push">&nbsp;</div>
+</div>
+
+<div id='adsgohere' class="adarea" align='center'>
+	<div id='mainAd' ad-img></div>
+</div>

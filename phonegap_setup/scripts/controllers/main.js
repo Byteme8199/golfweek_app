@@ -150,6 +150,30 @@ newsApp.controller('newsSection', ['$scope', '$routeParams', '$window', 'gw', 's
 angular
 
 
+// newsApp.controller('rankingSection', ['$scope', '$routeParams', '$window', '$location', 'gw', '$route', '$http',
+
+//     function ($scope, $routeParams, $window, $location, gw, $route, $http) {
+// 		'use strict';
+
+// 		$scope.$emit('LOAD');
+
+// 		gw.rankings($routeParams, {
+// 			success: function (d) {
+// 				console.log(d);
+// 				$scope.rankingsData = d;
+// 				$scope.tour = $routeParams.tour;
+// 				$scope.$emit('LOADDONE');
+// 			}
+// 		});
+
+// 		$scope.$on('$viewContentLoaded', function () {
+// 			$window.ga('send', 'pageview');
+// 			//$window.ga('send', 'pageview', {'title': titler.title() });
+// 			// ^-- we dont have the title function on this app yet
+// 		});
+
+//     }]);
+
 
 newsApp.controller('leaderboardSection', ['$scope', '$routeParams', '$window', '$location', 'gw', '$route',
     function ($scope, $routeParams, $window, $location, gw, $route) {
@@ -387,3 +411,118 @@ newsApp.controller('favCtrl', ['fav', '$scope', '$log',
 			}
 		});
     }]);
+
+
+function RankingController($scope, $http, $routeParams) {
+	$scope.rankList = $routeParams.tour
+	$scope.currentPage = 1;
+	$scope.pageSize = 50;	
+	$scope.listtype = 'Rankings';
+	
+
+	$scope.pageChangeHandler = function(num) {
+		console.log('rankings page changed to ' + num);
+	};
+
+	$scope.$watch('rankList', function() {
+
+		// Rankings
+
+		if($scope.rankList == 'pro'){
+			$scope.title = "Men's Professional Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'lpga'){
+			$scope.title = "Women's Professional Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'girls'){
+			$scope.title = "Girls Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'boys'){
+			$scope.title = "Boys Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'men'){
+			$scope.title = "Men's Collegiate Individual Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'mensteams'){
+			$scope.title = "Men's Team Collegiate Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'women'){
+			$scope.title = "Women's Collegiate Individual Rankings"
+			$scope.listtype = "Rankings"
+		}
+		if($scope.rankList == 'womensteams'){
+			$scope.title = "Women's Team Collegiate Rankings"
+			$scope.listtype = "Rankings"
+		}
+
+		// Tournaments
+
+		if($scope.rankList == 'prot'){
+			$scope.title = "Men's Professional Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'lpgat'){
+			$scope.title = "Women's Professional Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'girlst'){
+			$scope.title = "Girls Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'boyst'){
+			$scope.title = "Boys Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'ment'){
+			$scope.title = "Men's Collegiate Individual Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'mensteamst'){
+			$scope.title = "Men's Team Collegiate Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'woment'){
+			$scope.title = "Women's Collegiate Individual Tournaments"
+			$scope.listtype = "Tournament"
+		}
+		if($scope.rankList == 'womensteamst'){
+			$scope.title = "Women's Team Collegiate Tournaments"
+			$scope.listtype = "Tournament"
+		}
+
+
+		if($scope.rankList == 'boys' || $scope.rankList == 'girls'){
+			$scope.colspan = 7
+		} else if ($scope.rankList == 'men' || $scope.rankList == 'women') {
+			$scope.colspan = 6
+		} else {
+			$scope.colspan = 5
+		}
+
+		$scope.rankURL = 'http://rankings.golfweek.com/rankings/json/' + $scope.rankList + '.json';
+		
+		$scope.q = ""
+		$scope.r = ""
+		$scope.s = ""
+		$scope.t = ""
+		
+
+		$http.get($scope.rankURL)
+		.success(function(response) {
+			$scope.rankings = response;
+		});
+	
+	});
+}
+
+function OtherController($scope) {
+	$scope.pageChangeHandler = function(num) {
+		console.log('Changing Page');
+	};
+}

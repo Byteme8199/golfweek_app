@@ -1,7 +1,8 @@
 var newsApp = angular.module('newsApp', [
 'ngSanitize',
 'ngRoute',
-'hmTouchEvents'
+'hmTouchEvents',
+'angularUtils.directives.dirPagination'
 ]);
 
 var keepthis = {};
@@ -36,6 +37,16 @@ function ($routeProvider) {
   .when('/news/:section/:sub/', {
     controller: 'newsSection',
     templateUrl: 'views/section.html'
+  })
+  .when('/rankings/:tour/', {
+    //controller: 'RankingController',
+    templateUrl: 'views/rankings.html',
+    // resolve: {
+    //   load: function ($route, $location) {
+    //     console.log($route);
+    //     console.log($location);
+    //   }
+    // }
   })
   .when('/leaderboards/:tour/', {
     controller: 'leaderboardSection',
@@ -142,6 +153,18 @@ function ($http, $log, $q) {
         $log.log(status);
       });
     },
+
+    // rankings: function (rankingsData, context) {
+    //   $http.get('http://rankings.golfweek.com/rankings/json/pro.json')
+    //   .success(function (data) {
+    //     //console.log(data);
+    //     context.success(data);
+    //   })
+    //   .error(function (data, status) {
+    //     $log.log(data);
+    //     $log.log(status);
+    //   });
+    // },
 
     leaderboard: function (leaderboardData, context) {
       $http.post('http://rankings.golfweek.com/fetchurl/assets/leaderboard_expanded_app.asp?tour=' + leaderboardData.tour)

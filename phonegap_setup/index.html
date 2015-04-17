@@ -53,6 +53,9 @@
 					<li>
 						<a href="#/leaderboards/pga" hm-tap="sideToggle(); route('leaderboards/pga')">Leaderboards</a>
 					</li>
+					<li>
+						<a href="#/rankings/pro" hm-tap="sideToggle(); route('rankings/pro')">Rankings</a>
+					</li>
 					<li ng-repeat="section in feedData.sections">
 						<a hm-tap="sideToggle(); route('{{section.url}}/');" section="title"></a>
 					</li>
@@ -79,6 +82,7 @@
 	<script src="scripts/libs/hammer.js"></script>
 	<script src="scripts/libs/angular-hammer.js"></script>
 
+	<script src="scripts/libs/pagination.js"></script>
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/main.js"></script>
 

@@ -86,6 +86,39 @@
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/main.js"></script>
 
+
+	<script>
+
+		var GOOGLE_PROJECT_ID = "544722494265";
+		var PUSHAPPS_APP_TOKEN = "3df58cbe-decb-43fe-a99d-8f78b4d17bf0";
+
+		/**
+		 * Register current device with PushApps
+		 */
+		function registerDevice() {
+			PushNotification.registerDevice(GOOGLE_PROJECT_ID, PUSHAPPS_APP_TOKEN, function (pushToken) {
+		    //alert('registerDevice, push token' + pushToken);
+		  }, function (error) {
+		    //alert(error);
+		  });
+			
+			document.removeEventListener('pushapps.message-received');
+			document.addEventListener('pushapps.message-received', function(event) {
+	          var notification = event.notification;
+	          
+	          var devicePlatform = device.platform;
+	          if (devicePlatform === "iOS") {
+	          
+	          //alert("message-received, Message: " + notification.aps.alert + " , D: " + notification.D);
+	          } else {
+	          //alert("message-received, Message: " + notification.Message + " , Title: " + notification.Title + " , D: " + notification.D);
+	          }
+	          });
+		    
+		}
+
+	</script>
+
 </body>
 
 </html>

@@ -33,8 +33,8 @@ newsApp.controller('loadCtrl', ['$scope',
 
     }]);
 
-newsApp.controller('newsHome', ['$scope', '$routeParams', '$window', '$location', 'gw',
-    function ($scope, $routeParams, $window, $location, gw) {
+newsApp.controller('newsHome', ['$scope', '$routeParams', '$window', '$http', '$location', 'gw',
+    function ($scope, $routeParams, $window, $http, $location, gw) {
 		'use strict';
 		$scope.$emit('LOAD');
 
@@ -70,11 +70,16 @@ newsApp.controller('newsHome', ['$scope', '$routeParams', '$window', '$location'
 		});
     }]);
 
-newsApp.controller('newsSection', ['$scope', '$routeParams', '$window', 'gw', 'styler',
-    function ($scope, $routeParams, $window, gw, styler) {
+newsApp.controller('newsSection', ['$scope', '$routeParams', '$window', '$http', 'gw', 'styler',
+    function ($scope, $routeParams, $window, $http, gw, styler) {
 		'use strict';
 
 		$scope.$emit('LOAD');
+
+
+		getAds($scope, $http);
+		getAdsMid($scope, $http);
+
 
 		$scope.linkify = function (thing) {
 			return $routeParams.section + '/' + thing.toLowerCase().replace(/ /g, '-').replace(/'/g, '');
@@ -175,8 +180,8 @@ angular
 //     }]);
 
 
-newsApp.controller('leaderboardSection', ['$scope', '$routeParams', '$window', '$location', 'gw', '$route',
-    function ($scope, $routeParams, $window, $location, gw, $route) {
+newsApp.controller('leaderboardSection', ['$scope', '$routeParams', '$http', '$window', '$location', 'gw', '$route',
+    function ($scope, $routeParams, $window, $location, $http, gw, $route) {
 		'use strict';
 
 		$scope.$emit('LOAD');
@@ -196,15 +201,17 @@ newsApp.controller('leaderboardSection', ['$scope', '$routeParams', '$window', '
 			//$window.ga('send', 'pageview', {'title': titler.title() });
 			// ^-- we dont have the title function on this app yet
 		});
-
     }]);
 
 
-newsApp.controller('newsStory', ['$scope', '$routeParams', '$window', '$location', 'gw', '$route',
-    function ($scope, $routeParams, $window, $location, gw, $route) {
+newsApp.controller('newsStory', ['$scope', '$routeParams', '$window', '$http', '$location', 'gw', '$route',
+    function ($scope, $routeParams, $window, $location, $http, gw, $route) {
 		'use strict';
 
 		$scope.$emit('LOAD');
+
+		getAds($scope, $http);
+		getAdsMid($scope, $http);
 
 		$scope.url = 'http://golfweek.com/' + $location.path().replace('/story/', '');
 
@@ -246,11 +253,13 @@ newsApp.controller('newsStory', ['$scope', '$routeParams', '$window', '$location
 
     }]);
 
-newsApp.controller('mediaSection', ['$scope', '$routeParams', '$window', 'gw', 'styler', '$q',
-    function ($scope, $routeParams, $window, gw, styler, $q) {
+newsApp.controller('mediaSection', ['$scope', '$routeParams', '$window', '$http', 'gw', 'styler', '$q',
+    function ($scope, $routeParams, $window, $http, gw, styler, $q) {
 		'use strict';
 
 		$scope.$emit('LOAD');
+
+		getAds($scope, $http);
 
 		$scope.section = $routeParams.section;
 
@@ -323,12 +332,14 @@ newsApp.controller('mediaSection', ['$scope', '$routeParams', '$window', 'gw', '
 
     }]);
 
-newsApp.controller('galleryCtrl', ['$scope', '$routeParams', '$window', 'gw', '$q', '$location'
+newsApp.controller('galleryCtrl', ['$scope', '$routeParams', '$window', '$http', 'gw', '$q', '$location'
 ,
-	function ($scope, $routeParams, $window, gw, $q, $location) {
+	function ($scope, $routeParams, $window, gw, $q, $http, $location) {
 		'use strict';
 
 		$scope.$emit('LOAD');
+
+		getAds($scope, $http);
 
 		var def2 = $q.defer();
 
@@ -413,13 +424,20 @@ newsApp.controller('favCtrl', ['fav', '$scope', '$log',
     }]);
 
 
+newsApp.controller('adController', ['$scope', '$http',
+	function ($scope, $http) {
+		'use strict';
+		getAds($scope, $http)
+}]);
+
+
+
 function RankingController($scope, $http, $routeParams) {
 	$scope.rankList = $routeParams.tour
 	$scope.currentPage = 1;
 	$scope.pageSize = 50;	
 	$scope.listtype = 'Rankings';
 	
-
 	$scope.pageChangeHandler = function(num) {
 		console.log('rankings page changed to ' + num);
 	};
@@ -525,4 +543,94 @@ function OtherController($scope) {
 	$scope.pageChangeHandler = function(num) {
 		console.log('Changing Page');
 	};
+}
+
+
+function getAds($scope, $http) {
+	$scope.getRandomSpan = function() {
+		return Math.floor((Math.random() * 99999) + 1);
+	}
+
+	$scope.randomNumberForAds = $scope.getRandomSpan(); //for Correlator/cache-busting parameter
+	$scope.adurl = "";
+	$scope.adImageSrc = "";
+
+	$scope.openAd = function() {
+		if ($scope.adurl) {
+		   window.open($scope.adurl, "_system"); //using inAppbrowser plugin
+		}
+	}
+
+	//ng-hide ad section in the footer if offline
+	$scope.isOffline = 'onLine' in navigator && !navigator.onLine;
+	if (!$scope.isOffline) {
+		$http({
+			method: 'GET',
+			url: "http://pubads.g.doubleclick.net/gampad/adx?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=" + $scope.randomNumberForAds
+		}).success(function(data, status, headers, config) {
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+			//links
+			var links = doc.getElementsByTagName("a")
+			var urls = [];
+			for (var i = 0; i < links.length; i++) {
+			 urls.push(links[i].getAttribute("href"));
+			}
+			$scope.adurl = urls[0];
+			//images
+			var imgs = doc.getElementsByTagName("img");
+			var imgSrcs = [];
+			for (var i = 0; i < imgs.length; i++) {
+			 imgSrcs.push(imgs[i].src);
+			}
+			$scope.adImageSrc = imgSrcs[0];
+		}).error(function(data, status, headers, config) {
+			$scope.isOffline = true;
+		});
+	}
+}
+
+
+function getAdsMid($scope, $http) {
+	$scope.getRandomSpan = function() {
+		return Math.floor((Math.random() * 99999) + 1);
+	}
+
+	$scope.randomNumberForAds = $scope.getRandomSpan(); //for Correlator/cache-busting parameter
+	$scope.adurlMid = "";
+	$scope.adImageSrcMid = "";
+
+	$scope.openAdMid = function() {
+		if ($scope.adurlMid) {
+		   window.open($scope.adurlMid, "_system"); //using inAppbrowser plugin
+		}
+	}
+
+	//ng-hide ad section in the footer if offline
+	$scope.isOffline = 'onLine' in navigator && !navigator.onLine;
+	if (!$scope.isOffline) {
+		$http({
+			method: 'GET',
+			url: "http://pubads.g.doubleclick.net/gampad/adx?iu=/310322/a.site152.tmus/mobile&sz=300x250&c=" + $scope.randomNumberForAds
+		}).success(function(data, status, headers, config) {
+			var doc = document.createElement("html");
+			doc.innerHTML = data;
+			//links
+			var links = doc.getElementsByTagName("a")
+			var urls = [];
+			for (var i = 0; i < links.length; i++) {
+			 urls.push(links[i].getAttribute("href"));
+			}
+			$scope.adurlMid = urls[0];
+			//images
+			var imgs = doc.getElementsByTagName("img");
+			var imgSrcs = [];
+			for (var i = 0; i < imgs.length; i++) {
+			 imgSrcs.push(imgs[i].src);
+			}
+			$scope.adImageSrcMid = imgSrcs[0];
+		}).error(function(data, status, headers, config) {
+			$scope.isOffline = true;
+		});
+	}
 }

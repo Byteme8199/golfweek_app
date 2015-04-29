@@ -13,10 +13,10 @@
 
 		<div ng-if="Event.name !== ''">
 
-			<h3 class="nomargin">{{Event.name}}</h3><br>
-			<strong>{{Event.localCity}},	{{Event.LocState}}<br>
+			<h3 class="nomargin">{{Event.name}}</h3><br />
+			<strong>{{Event.localCity}},	{{Event.LocState}}<br />
 			{{Event.Loc}} - {{Event.CurTime}}</strong>
-			<br><br>
+			<br /><br />
 
 			<table id="leaderboard">
 				<thead>
@@ -41,6 +41,8 @@
 	<div class="push">&nbsp;</div>
 </div>
 
-<div id='adsgohere' class="adarea" align='center'>
-	<div id='mainAd' ad-img></div>
+<div id='adsgohere' class="adarea" align='center' ng-hide="isOffline" ng-controller="adController">
+	<a href='#' ng-click='openAd();'>
+		<img width="320" height="50" ng-src="{{adImageSrc}}">
+	</a>
 </div>

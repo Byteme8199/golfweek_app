@@ -28,9 +28,11 @@
 		<div></div>
         <p class="storyp" story-test></p>
 		<hr>
-		<a href='#' ng-click='openAdMid();'>
-	    	<img width="300" height="250" ng-src="{{adImageSrcMid}}">
-	    </a>
+		<div align='center' ng-controller="adController">
+		<a href='#' ng-click='openAdMid();' ng-controller="adController">
+			<img width="320" height="50" ng-src="{{adImageSrcMid}}">
+		</a>
+		</div>
 		<hr>
 		<div class="padmytop">
 			<h4>Related Stories</h4>
@@ -46,8 +48,8 @@
     </div>
 </div>
 
-<div id='adsgohere' class="adarea" align='center' ng-hide="isOffline">
-    <a href='#' ng-click='openAd();'>
-    	<img width="320" height="50" ng-src="{{adImageSrc}}">
-    </a>
- </div>
+<div id='adsgohere' class="adarea" align='center' ng-hide="isOffline" >
+	<a href='#' ng-click='openAd();'>
+		<img width="320" height="50" ng-src="{{adImageSrc}}">
+	</a>
+</div>

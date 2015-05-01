@@ -76,7 +76,6 @@ newsApp.controller('newsSection', ['$scope', '$routeParams', '$window', '$http',
 
 		$scope.$emit('LOAD');
 
-
 		getAds($scope, $http);
 		getAdsMid($scope, $http);
 
@@ -204,14 +203,11 @@ newsApp.controller('leaderboardSection', ['$scope', '$routeParams', '$http', '$w
     }]);
 
 
-newsApp.controller('newsStory', ['$scope', '$routeParams', '$window', '$http', '$location', 'gw', '$route',
-    function ($scope, $routeParams, $window, $location, $http, gw, $route) {
+newsApp.controller('newsStory', ['$scope', '$routeParams', '$window', '$location', 'gw', '$route',
+    function ($scope, $routeParams, $window, $location, gw, $route) {
 		'use strict';
 
 		$scope.$emit('LOAD');
-
-		getAds($scope, $http);
-		getAdsMid($scope, $http);
 
 		$scope.url = 'http://golfweek.com/' + $location.path().replace('/story/', '');
 
@@ -427,7 +423,8 @@ newsApp.controller('favCtrl', ['fav', '$scope', '$log',
 newsApp.controller('adController', ['$scope', '$http',
 	function ($scope, $http) {
 		'use strict';
-		getAds($scope, $http)
+		getAds($scope, $http);
+		getAdsMid($scope, $http)
 }]);
 
 

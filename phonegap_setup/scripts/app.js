@@ -646,208 +646,208 @@ function ($window, $location, $timeout, $scope) {
 }]);
 
 
-newsApp.directive('storyadImg', ['$q', '$window',
-function ($q, $window) {
+// newsApp.directive('storyadImg', ['$q', '$window',
+// function ($q, $window) {
 
-  var interval;
-  var deferred = $q.defer();
+//   var interval;
+//   var deferred = $q.defer();
 
-  function getGoogTag() {
-    if (!window.googletag) {
-      // creates the google ad page
-      var googletag = googletag || {};
-      googletag.cmd = googletag.cmd || [];
-      (function () {
-        var gads = document.createElement("script");
-        gads.async = true;
-        gads.type = "text/javascript";
-        var useSSL = "https:" == document.location.protocol;
-        gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
-        var node = document.getElementsByTagName("script")[0];
-        node.parentNode.insertBefore(gads, node);
-      })();
-    } else {
-      deferred.resolve();
-    }
-  }
+//   function getGoogTag() {
+//     if (!window.googletag) {
+//       // creates the google ad page
+//       var googletag = googletag || {};
+//       googletag.cmd = googletag.cmd || [];
+//       (function () {
+//         var gads = document.createElement("script");
+//         gads.async = true;
+//         gads.type = "text/javascript";
+//         var useSSL = "https:" == document.location.protocol;
+//         gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
+//         var node = document.getElementsByTagName("script")[0];
+//         node.parentNode.insertBefore(gads, node);
+//       })();
+//     } else {
+//       deferred.resolve();
+//     }
+//   }
 
-  function putAd(scope, elem) {
+//   function putAd(scope, elem) {
 
-    interval = window.setInterval(getGoogTag, 600);
+//     interval = window.setInterval(getGoogTag, 600);
 
-    deferred.promise.then(function () {
-      window.clearInterval(interval);
+//     deferred.promise.then(function () {
+//       window.clearInterval(interval);
 
-      if (document.getElementsByTagName('iframe').length === 1) {
-        googletag.pubads().refresh();
-      } else {
-        googletag.cmd.push(function () {
-          var adSlot = googletag.defineSlot('/310322/a.site152.tmus/mobile_app', [320, 250], elem);
-          adSlot.addService(googletag.pubads());
-          googletag.enableServices();
-        });
+//       if (document.getElementsByTagName('iframe').length === 1) {
+//         googletag.pubads().refresh();
+//       } else {
+//         googletag.cmd.push(function () {
+//           var adSlot = googletag.defineSlot('/310322/a.site152.tmus/mobile_app', [320, 250], elem);
+//           adSlot.addService(googletag.pubads());
+//           googletag.enableServices();
+//         });
 
-        googletag.cmd.push(function () {
-          googletag.display(elem);
-        });
-      }
+//         googletag.cmd.push(function () {
+//           googletag.display(elem);
+//         });
+//       }
 
-    });
-  }	
+//     });
+//   }	
 
-  function newWindow(element, url) {
+//   function newWindow(element, url) {
 
-    var cover = document.createElement('div');
+//     var cover = document.createElement('div');
 
-    var el = document.getElementById(element.parentElement.id);
-    el.insertBefore(cover, el.children[0]);
+//     var el = document.getElementById(element.parentElement.id);
+//     el.insertBefore(cover, el.children[0]);
 
-    function clickThing(url) {
-      var el = document.getElementById(element.parentElement.id);
-      el.addEventListener('click',
-      function () {
-        // var href = document.getElementsByTagName('iframe')[0].contentDocument.getElementsByTagName('a')[0].getAttribute('href');
-        var href = url;
+//     function clickThing(url) {
+//       var el = document.getElementById(element.parentElement.id);
+//       el.addEventListener('click',
+//       function () {
+//         // var href = document.getElementsByTagName('iframe')[0].contentDocument.getElementsByTagName('a')[0].getAttribute('href');
+//         var href = url;
 
-        var ref = window.open(href, '_blank', 'location=no,toolbar=yes'); // use self on android blank on ios
-        function closeRef(e) {
-          ref.removeEventListener('exit', function () {
-            ref.close();
-          });
-          ref.close();
-        }
+//         var ref = window.open(href, '_blank', 'location=no,toolbar=yes'); // use self on android blank on ios
+//         function closeRef(e) {
+//           ref.removeEventListener('exit', function () {
+//             ref.close();
+//           });
+//           ref.close();
+//         }
 
-        ref.addEventListener('exit', closeRef);
-      }, false);
-    };
+//         ref.addEventListener('exit', closeRef);
+//       }, false);
+//     };
 
-     var interval2;
-     interval2 = window.setInterval(function () {
-       if (document.getElementsByTagName('iframe').length > 0) {
-         window.clearInterval(interval2);
-         clickThing();
-       }
-     }, 600);
+//      var interval2;
+//      interval2 = window.setInterval(function () {
+//        if (document.getElementsByTagName('iframe').length > 0) {
+//          window.clearInterval(interval2);
+//          clickThing();
+//        }
+//      }, 600);
 
-    clickThing(url);
+//     clickThing(url);
 
-  }
+//   }
 
-  return function (scope, element, attrs) {
-     putAd(scope, element[0].id);
+//   return function (scope, element, attrs) {
+//      putAd(scope, element[0].id);
 
-     var getRand = Math.floor((Math.random()*600)+1);
-     var url = 'http://pubads.g.doubleclick.net/gampad/jump?iu=/310322/a.site152.tmus/mobile&sz=300x250&c=' + getRand;
-     element.html('<a id="adclick" href="' + url + '" target="_blank"><img src="http://pubads.g.doubleclick.net/gampad/ad?iu=/310322/a.site152.tmus/mobile&sz=300x250&c=' +
-                   getRand + '"></a>');
-     newWindow(element[0], url);
+//      var getRand = Math.floor((Math.random()*600)+1);
+//      var url = 'http://pubads.g.doubleclick.net/gampad/jump?iu=/310322/a.site152.tmus/mobile&sz=300x250&c=' + getRand;
+//      element.html('<a id="adclick" href="' + url + '" target="_blank"><img src="http://pubads.g.doubleclick.net/gampad/ad?iu=/310322/a.site152.tmus/mobile&sz=300x250&c=' +
+//                    getRand + '"></a>');
+//      newWindow(element[0], url);
 
-  };
-}]);
+//   };
+// }]);
 
 
-newsApp.directive('adImg', ['$q', '$window',
-function ($q, $window) {
+// newsApp.directive('adImg', ['$q', '$window',
+// function ($q, $window) {
 
-  var interval;
-  var deferred = $q.defer();
+//   var interval;
+//   var deferred = $q.defer();
 
-  function getGoogTag() {
-    if (!window.googletag) {
-      // creates the google ad page
-      var googletag = googletag || {};
-      googletag.cmd = googletag.cmd || [];
-      (function () {
-        var gads = document.createElement("script");
-        gads.async = true;
-        gads.type = "text/javascript";
-        var useSSL = "https:" == document.location.protocol;
-        gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
-        var node = document.getElementsByTagName("script")[0];
-        node.parentNode.insertBefore(gads, node);
-      })();
-    } else {
-      deferred.resolve();
-    }
-  }
+//   function getGoogTag() {
+//     if (!window.googletag) {
+//       // creates the google ad page
+//       var googletag = googletag || {};
+//       googletag.cmd = googletag.cmd || [];
+//       (function () {
+//         var gads = document.createElement("script");
+//         gads.async = true;
+//         gads.type = "text/javascript";
+//         var useSSL = "https:" == document.location.protocol;
+//         gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
+//         var node = document.getElementsByTagName("script")[0];
+//         node.parentNode.insertBefore(gads, node);
+//       })();
+//     } else {
+//       deferred.resolve();
+//     }
+//   }
 
-  function putAd(scope, elem) {
+//   function putAd(scope, elem) {
 
-    interval = window.setInterval(getGoogTag, 600);
+//     interval = window.setInterval(getGoogTag, 600);
 
-    deferred.promise.then(function () {
-      window.clearInterval(interval);
+//     deferred.promise.then(function () {
+//       window.clearInterval(interval);
 
-      if (document.getElementsByTagName('iframe').length === 1) {
-        googletag.pubads().refresh();
-      } else {
-        googletag.cmd.push(function () {
-          var adSlot = googletag.defineSlot('/310322/a.site152.tmus/mobile_app', [320, 50], elem);
-          adSlot.addService(googletag.pubads());
-          googletag.enableServices();
-        });
+//       if (document.getElementsByTagName('iframe').length === 1) {
+//         googletag.pubads().refresh();
+//       } else {
+//         googletag.cmd.push(function () {
+//           var adSlot = googletag.defineSlot('/310322/a.site152.tmus/mobile_app', [320, 50], elem);
+//           adSlot.addService(googletag.pubads());
+//           googletag.enableServices();
+//         });
 
-        googletag.cmd.push(function () {
-          googletag.display(elem);
-        });
-      }
+//         googletag.cmd.push(function () {
+//           googletag.display(elem);
+//         });
+//       }
 
-    });
-  }	
+//     });
+//   }	
 
-  function newWindow(element, url) {
+//   function newWindow(element, url) {
 
-    var cover = document.createElement('div');
-    cover.style.height = '50px';
-    cover.style.width = $window.innerWidth + 'px';
-    cover.style.bottom = '0';
-    cover.style.position = 'absolute';
+//     var cover = document.createElement('div');
+//     cover.style.height = '50px';
+//     cover.style.width = $window.innerWidth + 'px';
+//     cover.style.bottom = '0';
+//     cover.style.position = 'absolute';
 
-    var el = document.getElementById(element.parentElement.id);
-    el.insertBefore(cover, el.children[0]);
+//     var el = document.getElementById(element.parentElement.id);
+//     el.insertBefore(cover, el.children[0]);
 
-    function clickThing(url) {
-      var el = document.getElementById(element.parentElement.id);
-      el.addEventListener('click',
-      function () {
-        // var href = document.getElementsByTagName('iframe')[0].contentDocument.getElementsByTagName('a')[0].getAttribute('href');
-        var href = url;
+//     function clickThing(url) {
+//       var el = document.getElementById(element.parentElement.id);
+//       el.addEventListener('click',
+//       function () {
+//         // var href = document.getElementsByTagName('iframe')[0].contentDocument.getElementsByTagName('a')[0].getAttribute('href');
+//         var href = url;
 
-        var ref = window.open(href, '_blank', 'location=no,toolbar=yes'); // use self on android blank on ios
-        function closeRef(e) {
-          ref.removeEventListener('exit', function () {
-            ref.close();
-          });
-          ref.close();
-        }
+//         var ref = window.open(href, '_blank', 'location=no,toolbar=yes'); // use self on android blank on ios
+//         function closeRef(e) {
+//           ref.removeEventListener('exit', function () {
+//             ref.close();
+//           });
+//           ref.close();
+//         }
 
-        ref.addEventListener('exit', closeRef);
-      }, false);
-    };
+//         ref.addEventListener('exit', closeRef);
+//       }, false);
+//     };
 
-     var interval2;
-     interval2 = window.setInterval(function () {
-       if (document.getElementsByTagName('iframe').length > 0) {
-         window.clearInterval(interval2);
-         clickThing();
-       }
-     }, 600);
+//      var interval2;
+//      interval2 = window.setInterval(function () {
+//        if (document.getElementsByTagName('iframe').length > 0) {
+//          window.clearInterval(interval2);
+//          clickThing();
+//        }
+//      }, 600);
 
-    clickThing(url);
+//     clickThing(url);
 
-  }
+//   }
 
-  return function (scope, element, attrs) {
-     putAd(scope, element[0].id);
+//   return function (scope, element, attrs) {
+//      putAd(scope, element[0].id);
 
-     var getRand = Math.floor((Math.random()*600)+1);
-     var url = 'http://pubads.g.doubleclick.net/gampad/jump?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' + getRand;
-     element.html('<a id="adclick" href="' + url + '" target="_blank"><img src="http://pubads.g.doubleclick.net/gampad/ad?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' +
-                   getRand + '"></a>');
-     newWindow(element[0], url);
+//      var getRand = Math.floor((Math.random()*600)+1);
+//      var url = 'http://pubads.g.doubleclick.net/gampad/jump?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' + getRand;
+//      element.html('<a id="adclick" href="' + url + '" target="_blank"><img src="http://pubads.g.doubleclick.net/gampad/ad?iu=/310322/a.site152.tmus/mobile&sz=300x50&c=' +
+//                    getRand + '"></a>');
+//      newWindow(element[0], url);
 
-  };
-}]);
+//   };
+// }]);
 
 
 //  Google analytics
